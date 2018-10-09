@@ -14,7 +14,7 @@ const (
 	statusOk = iota
 )
 
-type Response struct {
+type ResponseSimple struct {
 	Status  int    `json:"status"`
 	Message string `json:"message,omitempty"`
 	Count   int32  `json:"count"`
@@ -82,7 +82,7 @@ func handleConnection(c net.Conn) {
 		log.Fatal(err)
 	}
 
-	jsonData, err := json.Marshal(Response{
+	jsonData, err := json.Marshal(ResponseSimple{
 		Status:  statusOk,
 		Message: "Cool",
 		Count:   conter.getOpenSession(),
@@ -95,5 +95,4 @@ func handleConnection(c net.Conn) {
 
 	// send new string back to client
 	c.Write(jsonData)
-
 }
